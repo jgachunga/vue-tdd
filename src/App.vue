@@ -1,32 +1,30 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+  <div>
+    <new-message-form @send="addMessage"/>
+    <message-list :messages="messages" />
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-#nav {
-  padding: 30px;
-}
+import NewMessageForm from "./components/NewMessageForm";
+import MessageList from './components/MessageList';
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+export default {
+  name: "App",
+  components: {
+    NewMessageForm,
+    MessageList
+  },
+  data() {
+    return {
+      messages: []
+    };
+  },
+  methods: {
+    addMessage(text) {
+      this.messages.unshift(text);
+    }
+  }
+};
+</script>
